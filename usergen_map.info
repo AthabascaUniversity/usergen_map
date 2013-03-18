@@ -1,0 +1,11 @@
+; $Id:$
+name = User Generated Maps
+description = "This module provides users with the ability to generate timelines based on node data"
+core = 6.x
+php = 5.1
+package = Data visualization
+version = 6.x-1.0
+
+dependencies[] = content
+dependencies[] = location
+dependencies[] = gmap

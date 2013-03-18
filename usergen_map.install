@@ -1,0 +1,66 @@
+<?php
+/*
+ * Builds scheme for usergen_map install/uninstall.  We want this data to be removed when the module is uninstalled. 
+ *
+ * @return array Scheme expressed as an array. 
+ */
+function usergen_map_schema() {
+  $schema['usergen_map_saved'] = array(
+    'description' => t('Base table for the usergen_map module to save user-generated maps.'),
+    'fields' => array(
+      'vid' => array(
+        'description' => t('Unique identifier for the saved bookmark'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'auto_increment' => TRUE,
+        ),
+      'uid' => array(
+        'description' => t('User ID for the saved map'),
+        'type' => 'int',
+        'not null' => TRUE,
+        ),
+      'usergen_map_saved_title' => array(
+        'description' => t('Title for the saved map'),
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => FALSE,
+        'default' => 'Saved map',
+        ),
+      'created' => array(
+        'description' => t('Date the map was saved.'),
+        'type' => 'datetime',
+        'not null' => FALSE,
+        ),
+      'usergen_map_saved_value' => array(
+        'description' => t('JSON-encoded array of filter options'),
+        'type' => 'text',
+        'not null' => TRUE,
+        ),
+      ),
+    'primary key' => array('vid'),
+    );
+    
+  return $schema;
+  
+} // end usergen_map_schema();
+
+/**
+  * Module installation instructions
+  *
+  * @return none
+  */
+function usergen_map_install() {
+
+  drupal_install_schema('usergen_map');
+
+} // end usergen_map_install();
+
+/**
+  * Module uninstall instructions
+  *
+  * @return none
+  */
+function usergen_map_uninstall() {
+
+  drupal_uninstall_schema('usergen_map');
+} // end usergen_map_uninstall();
